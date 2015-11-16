@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<title>Save Goat Islands</title>
+<head>
+  <meta charset="utf-8" />
+  <title>jQuery UI Dialog - Default functionality</title>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css" />
+  
+  <script>
+  $(function() {
+    $( "#dialog" ).dialog();
+  });
+  </script>
+  
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+  <script src='http://api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.js'></script>
+  <link href='http://api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.css' rel='stylesheet' />
+  
+  <!--[if lte IE 8]>
+    <link href='http://api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.ie.css' rel='stylesheet' >
+  <![endif]-->
+  <style>
+		body { margin:0; padding:0; }
+		#map { position:absolute; top:0; bottom:0; width:100%; }
+  </style>
+	  
+  <style type="text/css">
+		p.shadowed {
+		  text-shadow: #FFFFFF 0px 0px 3px;
+		}
+  </style>
+	<!--[if IE]><style type="text/css">
+	p.shadowed span {
+		display: block;
+		width: 100%;
+		filter: glow(color=#ffffff,strength=3);
+	}
+	</style><![endif]-->
+	
+  <link rel="stylesheet" href="src/fullscreen.css" />
+  <!-- Leaflet Plugins -->
+  <link rel="stylesheet" href="src/Control.MiniMap.css" />
+  <script src="src/Control.MiniMap.js" type="text/javascript"></script>
+	
+</head>
+
+<body>
+	<div id="dialog" title="Port at Goat Islands">
+	  <font size = "2"><font face="Helvetica Neue, Helvetica, sans-serif">
+	  <h4>Proposed Transshipment Port</h4>
+	  <p>
+	  China Harbour Engineering Company (CHEC) plans to build a port for crane assembly in Portland Bight Protected Area (PBPA).  The actual development plans and whether it will create new jobs for the people of Jamaica remains unclear.</p><p>
+	  Explore this story map to learn how PBPA's significant environmental assets could be impacted by a port at Goat Islands.</p>
+	  <p></p>
+	  <u>Instructions</u>:<br>
+	  <li><i>Quick Zoom</i><br>> hold shift key and draw box<br>&nbsp;&nbsp;<img src="img/DrawBox.jpg"></li><p></p>
+	  <li><i>Add/Remove Layers</i><br>> hover cursor over layers pallete in upper left<br>&nbsp;&nbsp;<img src="img/LayerPallete.jpg"></li>
+	  </font>
+	</div>
+
+
+	<style>
+	 .map-legend {
+		max-width: 380px !important;
+		min-width: 380px;
+		border:1px solid #000000;
+	  }
+	  
+	 .map-tooltip {
+		background-color: #000000;
+		border:1px solid #000000;
+		max-width:1152px !important;
+
+	 #map-ui {
+		position:absolute;
+		top:65px;left:10px;
+		z-index:100;
+		}
+	 #map-ui ul {
+		list-style:none;
+		margin:0;padding:0;
+		}
+	 #map-ui a {
+		font: normal 13px/18px 'Helvetica Neue', Helvetica, sans-serif;
+		font-size:13px;
+		background:#F0F0F0;
+		color:#000000;
+		display:block;
+		margin:0;padding:0;
+		border:1px solid #000000;
+		border-bottom-width:0;
+		min-width:100px;
+		padding:5px;
+		text-decoration:none;
+		}
+	 #map-ui a:hover { background:#73B5E5; }
+	 #map-ui li:last-child a {
+		border-bottom-width:1px;
+		-webkit-border-radius:0 0 3px 3px;
+		border-radius:0 0 3px 3px;
+		}
+	 #map-ui li:first-child a {
+		-webkit-border-radius:3px 3px 0 0;
+		border-radius:3px 3px 0 0;
+		}
+	</style>
+
+<div id='map'></div>
+
+<style>
+.popup {
+    text-align: center;
+}
+.popup img {
+    width: 25%;
+}
+</style>
+
+<div id='legend-content' style='display: none;'>
+<div class='my-legend'>
+<span style='color:#bdbdbd'><font size='5'>&#9632;</font></span> Causeway <span style='color:#63636F'><font size='5'>&#9632;</font></span> Industry <span style='color:#377eb8'><font size='5'>&#9632;</font></span> Channel <span style='color:#e34a33'><font size='5'>&#9632;</font></span> Cont Terminal <span style='color:#000'><font size='3'>&#9737;</font></span> Borehole<br>
+<a href="http://savegoatislands.org/" target="_blank">Save Goat Islands</a> || <a href="http://savegoatislands.org/photos-videos/" target="_blank">Multimedia</a> || <a href="http://savegoatislands.org/information/" target="_blank">Legal Docs</a> || <a href="http://chn.ge/1ecZdCO" target="_blank">Sign the Petition!</a><br>
+<b>Habitats:</b> <span style='color:#008B00'><font size='5'>&#9632;</font></span> Mangrove <span style='color:#00FF7F'><font size='5'>&#9632;</font></span> Seagrass <span style='color:#D99694'><font size='5'>&#9632;</font></span> Coral
+</div>
+  <style type='text/css'>
+    .my-legend .legend-title {
+      text-align: left;
+      margin-bottom: 8px;
+      font-weight: bold;
+      font-size: 90%;
+      }
+    .my-legend .legend-scale ul {
+      margin: 0;
+      padding: 0;
+      float: left;
+      list-style: none;
+      }
+    .my-legend .legend-scale ul li {
+      display: block;
+      float: left;
+      width: 50px;
+      margin-bottom: 6px;
+      text-align: center;
+      font-size: 80%;
+      list-style: none;
+      }
+    .my-legend ul.legend-labels li span {
+      display: block;
+      float: left;
+      height: 15px;
+      width: 50px;
+      }
+    .my-legend .legend-source {
+      font-size: 70%;
+      color: #FFFF;
+      clear: both;
+      }
+    .my-legend a {
+      color: #777;
+      }
+  </style>
+</div>
+
+<script type='text/javascript'>
+	var map = L.mapbox.map('map', 'geointerest.map-dqz2pa8r', { zoomControl: false }).setView([17.80, -77.04], 12);
+	map.options.maxZoom = 16;map.options.minZoom = 12;
+	  
+	map.legendControl.addLegend(document.getElementById('legend-content').innerHTML);
+	new L.Control.Zoom({ position: 'topleft' }).addTo(map);
+	L.control.scale({ position: 'bottomleft' }).addTo(map);
+	  
+	L.control({ position: 'topleft' })
+	map.attributionControl.setPrefix('<a href="http://www.naturalcapitalproject.org/people.html#Verutes">Mapping portal by Gregg Verutes</a>');
+	  
+	var PB_Tour = L.mapbox.gridLayer('ccam.PB_Tour');
+	map.addLayer(PB_Tour);
+	map.addControl(L.mapbox.gridControl(PB_Tour, {follow: true}));
+	
+    var PB_Species = L.mapbox.gridLayer('ccam.PB_Species');
+	map.addLayer(PB_Species);
+	map.addControl(L.mapbox.gridControl(PB_Species, {follow: true}));
+	
+	var mapboxUrl='http://a.tiles.mapbox.com/v3/geointerest.map-dqz2pa8r/{z}/{x}/{y}.png';
+	var mb = new L.TileLayer(mapboxUrl, {minZoom: 0, maxZoom: 14});
+	var miniMap = new L.Control.MiniMap(mb, { toggleDisplay: true }).addTo(map);  
+	
+	L.control.layers({
+		'satellite': L.mapbox.tileLayer('geointerest.map-dqz2pa8r').addTo(map),
+	}, {
+		'overview map<br><hr><b>Natural Capital</b><br>': L.mapbox.tileLayer('ccam.PB_BaseMap').addTo(map),
+		'marine habitats': L.mapbox.tileLayer('ccam.PB_Habitats').addTo(map),
+		'critical species<br><b>Threats</b><br>': L.mapbox.tileLayer('ccam.PB_Species').addTo(map),
+		'port development<br><hr><b>Base Layers</b><br>': L.mapbox.tileLayer('ccam.PB_Port').addTo(map),
+		'interactive tour': L.mapbox.tileLayer('ccam.PB_Tour').addTo(map),
+		'labels / place names<br><hr><b>Impact Assessments</b><br>': L.mapbox.tileLayer('ccam.PB_Labels').addTo(map),
+		'risk to habitats': L.mapbox.tileLayer('ccam.PB_HRA'),
+		'light pollution': L.mapbox.tileLayer('ccam.PB_SQ'),
+		'coastal blue carbon': L.mapbox.tileLayer('ccam.PB_CBC'),
+		'coastal exposure': L.mapbox.tileLayer('ccam.PB_CV'),
+	}, {position: 'topleft'}).addTo(map);
+
+
+	map.on('layeradd', function(e) {
+		if (e.layer.getTileJSON) {
+		  map.legendControl.addLegend(e.layer.getTileJSON().legend);
+		}
+	  });
+	map.on('layerremove', function(e) {
+		if (e.layer.getTileJSON) {
+		  map.legendControl.removeLegend(e.layer.getTileJSON().legend);
+		}
+	  });
+
+</script>
+</body>
+</html>
